@@ -7,7 +7,7 @@ function Employees({ users, handleSort }) {
             <table>
                 <thead>
                     <tr>
-                        <th onClick={() => {handleSort(users.name)}}>Name</th>
+                        <th onClick={() => {handleSort(users)}}>Name</th>
                         <th>Phone</th>
                         <th>E-mail</th>
                     </tr>

@@ -60,30 +60,38 @@ class Home extends Component {
 
 
 
-handleSort = (name) => {
-    if (this.state.sortDirection === "desc") {
-        this.flipSortDirection()
-    } else {
-        this.flipSortDirection()
+    handleSort = (name) => {
+        // console.log(name);
+        const comparator = (a, b) => {
+            console.log(a);
+            console.log(b);
+            if (this.state.sortDirection === "desc") {
+                this.flipSortDirection()
+                this.setState({sortDirection : "asc"})
+                return a.name.last.localeCompare(b.name.last);
+            } else {
+                this.flipSortDirection()
+                this.setState({sortDirection : "desc"})
+                return b.name.last.localeCompare(a.name.last);
+            }
+        }
+        var sortedEmployees = this.state.filteredEmployees.sort(comparator)
+        console.log(sortedEmployees);
+        this.setState({
+            filteredEmployees: sortedEmployees
+        })
     }
-   
-    var sortedEmployees = this.state.filteredEmployees.sort((a, b) => a.localeCompare(b))
-
-    this.setState({
-        filteredEmployees: sortedEmployees
-    })
-}
 
 
-render() {
-    return (
-        <div>
-            <SearchForm handleInputChange={this.filteredEmployee}></SearchForm>
-            <Employees users={this.state.filteredEmployees} handleSort={this.handleSort}></Employees>
-        </div>
+    render() {
+        return (
+            <div>
+                <SearchForm handleInputChange={this.filteredEmployee}></SearchForm>
+                <Employees users={this.state.filteredEmployees} handleSort={this.handleSort}></Employees>
+            </div>
 
-    )
-}
+        )
+    }
 }
 
 
